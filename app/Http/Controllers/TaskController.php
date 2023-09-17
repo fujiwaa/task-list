@@ -41,7 +41,7 @@ class TaskController extends Controller
         $task->id_user = $request->id_user;
         $task->save();
 
-        return to_route('task.index')->with('success', 'Data berhasil ditambahkan!');
+        return to_route('task.index')->with('task-success', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -79,7 +79,7 @@ class TaskController extends Controller
         $task->id_user = $request->id_user;
         $task->save();
 
-        return to_route('task.index')->with('success', 'Data berhasil diedit!');
+        return to_route('task.index')->with('task-success', 'Data berhasil diedit!');
     }
 
     /**
@@ -90,6 +90,6 @@ class TaskController extends Controller
         $task = TaskModel::find($id);
         $task->delete();
 
-        return back()->with('success', 'Data berhasil dihapus!');
+        return back()->with('task-success', 'Data berhasil dihapus!');
     }
 }

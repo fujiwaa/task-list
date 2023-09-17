@@ -39,9 +39,9 @@
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="id_user" id="id_user">
                       <option selected></option>
-                      <option value="1">Fuji</option>
-                      <option value="2">Sultan</option>
-                      <option value="3">Luqman</option>
+                      <option value="1">Jiwa</option>
+                      <option value="2">Luqman</option>
+                      <option value="3">Amon</option>
                     </select>
                   </div>
                 </div>

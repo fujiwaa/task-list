@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.add');
     }
 
     /**
@@ -28,7 +28,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_user' => 'required|min:3',
+        ]);
+        
+        $user = new UserModel;
+        $user->nama_user = $request->nama_user;
+        $user->save();
+
+        return to_route('task.index')->with('user-success', 'Data User berhasil ditambahkan!');
     }
 
     /**
@@ -44,7 +52,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('user.edit')->with([
+            'user' => UserModel::find($id),
+        ]);
     }
 
     /**
@@ -52,7 +62,15 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_user' => 'required',
+        ]);
+        
+        $user = UserModel::find($id);
+        $user->nama_user = $request->nama_user;
+        $user->save();
+
+        return to_route('task.index')->with('user-success', 'Data User berhasil diedit!');
     }
 
     /**
@@ -60,6 +78,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = UserModel::find($id);
+        $user->delete();
+
+        return back()->with('user-success', 'Data berhasil dihapus!');
     }
 }
