@@ -27,10 +27,9 @@
                   <label for="status_task" class="col-sm-2 col-form-label">Status</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="status_task" id="status_task">
-                      <option selected>{{ $task->status_task }}</option>
-                      <option value="Start">Start</option>
-                      <option value="Progress">Progress</option>
-                      <option value="Done">Done</option>
+                      <option value="Start" {{ $task->status_task == 'Start' ? 'selected' : ''}}>Start</option>
+                      <option value="Progress" {{ $task->status_task == 'Progress' ? 'selected' : ''}}>Progress</option>
+                      <option value="Done" {{ $task->status_task == 'Done' ? 'selected' : ''}}>Done</option>
                     </select>
                   </div>
                 </div>
@@ -39,10 +38,9 @@
                   <label for="id_user" class="col-sm-2 col-form-label">User</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="id_user" id="id_user">
-                      <option selected>{{ $task->id_user }}</option>
-                      <option value="1">Jiwa</option>
-                      <option value="2">Luqman</option>
-                      <option value="3">Amon</option>
+                      @foreach ($user as $us)
+                      <option value="{{ $us->id_user }}" {{ $task->id_user == $us->id_user ? 'selected' : ''}}>{{ $us->nama_user }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>

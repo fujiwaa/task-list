@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -12,8 +13,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $data = ['task' => TaskModel::all()];
-        return view('task.index', $data);
+        $datatask = ['task' => TaskModel::all()];
+        $datauser = ['user' => UserModel::all()];
+        return view('task.index', $datatask, $datauser);
     }
 
     /**
@@ -57,8 +59,10 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
+
         return view('task.edit')->with([
             'task' => TaskModel::find($id),
+            'user' => UserModel::all(),
         ]);
     }
 

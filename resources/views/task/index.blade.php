@@ -68,10 +68,10 @@
                         <th>Aksi</th>
                     </thead>
                     <tbody>
-                            @forelse ($task as $cl => $hasil)
+                            @forelse ($user as $cl => $hasil)
                                 <tr>
                                     <th>{{ $cl+1 }}</th>
-                                    <td>{{ $hasil->User->nama_user }}</td>
+                                    <td>{{ $hasil->nama_user }}</td>
                                     <td>
                                         <form action="{{ route('user.destroy', $hasil->id_user) }}" method="POST">
                                             @csrf
