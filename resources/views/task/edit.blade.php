@@ -24,12 +24,12 @@
                 </div>
 
                 <div class="mb-3 row">
-                  <label for="status_task" class="col-sm-2 col-form-label">Status</label>
+                  <label for="id_status_task" class="col-sm-2 col-form-label">Status</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example" name="status_task" id="status_task">
-                      <option value="Start" {{ $task->status_task == 'Start' ? 'selected' : ''}}>Start</option>
-                      <option value="Progress" {{ $task->status_task == 'Progress' ? 'selected' : ''}}>Progress</option>
-                      <option value="Done" {{ $task->status_task == 'Done' ? 'selected' : ''}}>Done</option>
+                    <select class="form-select" aria-label="Default select example" name="id_status_task" id="id_status_task">
+                      @foreach ($status as $stat)
+                      <option value="{{ $stat->id_status_task }}" {{ $task->id_status_task == $stat->id_status_task ? 'selected' : ''}}>{{ $stat->nama_status }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>

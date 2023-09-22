@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TaskModel;
 use App\Models\UserModel;
+use App\Models\StatusModel;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -21,11 +22,15 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() 
+    public function create($userId) 
     {
-        return view('task.add');
+        $user = UserModel::find($userId); 
+        $statusTasks = StatusModel::where('id_user', $userId)->get();
+        return view('task.add')->with([
+            'user' => $user,
+            'statusTasks' => $statusTasks,
+        ]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -33,14 +38,17 @@ class TaskController extends Controller
     {
         $request->validate([
             'nama_task' => 'required',
-            'status_task' => 'required',
+            'id_status_task' => 'required',
             'id_user' => 'required',
         ]);
-        
+
+        $idStatusTask = $request->input('id_status_task');
+        $idUser = $request->input('id_user');
+
         $task = new TaskModel;
         $task->nama_task = $request->nama_task;
-        $task->status_task = $request->status_task;
-        $task->id_user = $request->id_user;
+        $task->id_status_task = $idStatusTask;
+        $task->id_user = $idUser;
         $task->save();
 
         return to_route('task.index')->with('task-success', 'Data berhasil ditambahkan!');
@@ -63,6 +71,7 @@ class TaskController extends Controller
         return view('task.edit')->with([
             'task' => TaskModel::find($id),
             'user' => UserModel::all(),
+            'status' => StatusModel::all(),
         ]);
     }
 
@@ -73,13 +82,13 @@ class TaskController extends Controller
     {
         $request->validate([
             'nama_task' => 'required|min:3',
-            'status_task' => 'required|min:3',
+            'id_status_task' => 'required|min:3',
             'id_user' => 'required',
         ]);
         
         $task = TaskModel::find($id);
         $task->nama_task = $request->nama_task;
-        $task->status_task = $request->status_task;
+        $task->id_status_task = $request->id_status_task;
         $task->id_user = $request->id_user;
         $task->save();
 

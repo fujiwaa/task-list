@@ -23,13 +23,12 @@
                 </div>
 
                 <div class="mb-3 row">
-                  <label for="status_task" class="col-sm-2 col-form-label">Pilih Status</label>
+                  <label for="id_status_task" class="col-sm-2 col-form-label">Pilih Status</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example" name="status_task" id="status_task">
-                        <option selected></option>
-                        <option value="Start">Start</option>
-                        <option value="Progres">Progress</option>
-                        <option value="Done">Done</option>
+                    <select class="form-select" aria-label="Default select example" name="id_status_task" id="id_status_task">
+                        @foreach($statusTasks as $statusTask)
+                        <option value="{{ $statusTask->id_user }}" {{ $statusTask->id_user == $user->id_user ? 'selected' : '' }}>{{ $statusTask->nama_status }}</option>
+                        @endforeach
                       </select>
                   </div>
                 </div>
@@ -38,10 +37,7 @@
                   <label for="id_user" class="col-sm-2 col-form-label">User</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="id_user" id="id_user">
-                      <option selected></option>
-                      <option value="1">Jiwa</option>
-                      <option value="2">Luqman</option>
-                      <option value="3">Amon</option>
+                      <option value="{{ $user->id_user }}">{{ $user->nama_user }}</option>
                     </select>
                   </div>
                 </div>

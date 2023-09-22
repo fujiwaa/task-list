@@ -11,4 +11,9 @@ class UserModel extends Model
     protected $table = 'user';
     protected $primaryKey = 'id_user';
     protected $guarded = ['id_user'];
+
+    public function Task()
+    {
+        return $this->hasMany(TaskModel::class, 'id_user');
+    }
 }

@@ -20,4 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('task', TaskController::class);
+Route::get('/task/create/{userId}', [TaskController::class, 'create']);
 Route::resource('user', UserController::class);
